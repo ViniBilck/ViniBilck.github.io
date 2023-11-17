@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulation</title>
+    <script src="ruggekutta.js"></script>
+    <style>
+        #stack {
+            position:relative;
+        }
+        #stack > canvas {
+            position:absolute;
+            left:0;
+            top:0;
+        }
+    </style>
+</head>
+<body>
+    <div id="stack">
+        <canvas id="canvas2" width="1920" height="1080"></canvas>
+        <canvas id="canvas" width="1920" height="1080"></canvas>
+    </div>
+    <script>
+        var cnv = document.getElementById("canvas");
+        var ctx = cnv.getContext("2d");
+        var cnv2 = document.getElementById("canvas2");
+        var ctx2 = cnv2.getContext("2d");
+        var t = 0; //iniciar plot na parte inferior
+        var dt_ms = 16.0;
+        var dt = dt_ms / 5000
+        ctx.lineWidth = 5
+        ctx.strokeStyle = "green";
+        var N = 10;
+        var delta_x_axes = 1920/N;
+        var delta_y_axes = 1080/N;
+        var y_ax = 0;
+        var x_ax = 0;
+        for(i = 0; i<=N; i++){
+            axesHorizontal(y_ax);
+            axesVertical(x_ax);
+            y_ax = y_ax + delta_y_axes;
+            x_ax = x_ax + delta_x_axes;
+        }
+
+        roda()
+    </script>
+</body>
+</html>
