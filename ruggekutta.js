@@ -1,6 +1,6 @@
 function twoBodyProblem(t, state) {
     const G = 1; // Gravitational constant
-    const m1 = 10000; // Mass of body 1 (Earth)
+    const m1 = 2000; // Mass of body 1 (Earth)
     const m2 = 4; // Mass of body 2 (Moon)
 
     const [x1, y1, vx1, vy1, x2, y2, vx2, vy2] = state;
@@ -55,49 +55,31 @@ function getColumn(matrix, col) {
 function axesHorizontal(y){
     ctx2.beginPath();
     ctx2.moveTo(0,y);
-    ctx2.lineTo(1920, y);
+    ctx2.lineTo(width, y);
     ctx2.stroke();
 
 }
 
 function axesVertical(x){
-    ctx2.strokeStyle = "green";
     ctx2.beginPath();
     ctx2.moveTo(x,0);
-    ctx2.lineTo(x, 1080);
+    ctx2.lineTo(x, height);
     ctx2.stroke();
 
 }
 
-
-// Example usage:
-const initialState = [-100 + 960, -100 + 540, 0, 0, 100 + 960, 100 + 540, 0, -5]; // [x1, y1, vx1, vy1, x2, y2, vx2, vy2]
-const initialTime = 0;
-const finalTime = 3000;
-const stepSize = 1;
-
-const results = rungeKutta(twoBodyProblem, initialState, initialTime, finalTime, stepSize);
-
-var x1_values = getColumn(results, 0)
-var y1_values = getColumn(results, 1)
-        
-var x2_values = getColumn(results, 4)
-var y2_values = getColumn(results, 5)
-
-        
-i = 0
 function draw(x, y) {
-    ctx.clearRect(0,0, 1920, 1080);                   //Particula
+    ctx.clearRect(0,0, height, width);                   //Particula
     
     ctx.beginPath();
-    ctx.ellipse(x1_values[i] , y1_values[i], 20, 20, 0, 0, Math.PI * 2);
+    ctx.ellipse(x1_values[i] , y1_values[i], 5, 5, 0, 0, Math.PI * 2);
     ctx.strokeStyle = "#edf0f1";
     ctx.fillStyle = "#519872";
     ctx.stroke();
     ctx.fill();
 
     ctx.beginPath();
-    ctx.ellipse(x2_values[i] , y2_values[i], 20, 20, 0, 0, Math.PI * 2);
+    ctx.ellipse(x2_values[i] , y2_values[i], 5, 5, 0, 0, Math.PI * 2);
     ctx.strokeStyle = "#edf0f1";
     ctx.fillStyle = "#519872";
     ctx.stroke();
@@ -118,4 +100,3 @@ function here(){
 function roda(){
     K = setInterval("here()",dt_ms);
 }
-        

@@ -6,6 +6,16 @@
     <title>Simulation</title>
     <script src="ruggekutta.js"></script>
     <style>
+        #inner {  
+            border: 0.05em;
+        }
+
+        #outer {
+            border: 0.05em ;
+            width:50%;
+            display: flex;
+            justify-content: center;
+        }
         #stack {
             position:relative;
         }
@@ -17,31 +27,49 @@
     </style>
 </head>
 <body>
-    <div id="stack">
-        <canvas id="canvas2" width="1920" height="1080"></canvas>
-        <canvas id="canvas" width="1920" height="1080"></canvas>
+    <div id="outer">
+        <div id = "inner">
+            <div id="stack">
+                <canvas id="canvas2" width="600" height="600"></canvas>
+                <canvas id="canvas" width="600" height="600"></canvas>
+            </div>
+        </div>
     </div>
     <script>
         var cnv = document.getElementById("canvas");
         var ctx = cnv.getContext("2d");
         var cnv2 = document.getElementById("canvas2");
         var ctx2 = cnv2.getContext("2d");
+        var width = canvas.width;
+        var height = canvas.height;
+        const initialState = [width/2, height/2, 0, 0, 100 + width/2, 0 + height/2, 0, 4]; // [x1, y1, vx1, vy1, x2, y2, vx2, vy2]
+        const initialTime = 0;
+        const finalTime = 3000;
+        const stepSize = 1;
+
+        const results = rungeKutta(twoBodyProblem, initialState, initialTime, finalTime, stepSize);
+
+        var x1_values = getColumn(results, 0);
+        var y1_values = getColumn(results, 1);
+                
+        var x2_values = getColumn(results, 4);
+        var y2_values = getColumn(results, 5);
         var t = 0; //iniciar plot na parte inferior
         var dt_ms = 16.0;
         var dt = dt_ms / 5000
-        ctx.lineWidth = 5
-        ctx.strokeStyle = "green";
         var N = 10;
-        var delta_x_axes = 1920/N;
-        var delta_y_axes = 1080/N;
+        var delta_x_axes = width/N;
+        var delta_y_axes = height/N;
         var y_ax = 0;
         var x_ax = 0;
+        ctx2.strokeStyle = "black";
         for(i = 0; i<=N; i++){
             axesHorizontal(y_ax);
             axesVertical(x_ax);
             y_ax = y_ax + delta_y_axes;
             x_ax = x_ax + delta_x_axes;
         }
+        
 
         roda()
     </script>
