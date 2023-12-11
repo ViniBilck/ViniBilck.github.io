@@ -90,6 +90,25 @@
         <canvas id="canvas" width="1212" height="920"></canvas>
       </section>   
     <script>
+        function here(){
+            //draw_lines();
+            draw();
+            i++;
+        }
+        //Simular
+        function roda(){
+            K = setInterval("here()",dt_ms);
+        }
+
+        function do_sim() {
+            i =0;
+            roda()
+        }
+
+        function stop(){
+            clearInterval(K)
+            ctx.clearRect(0,0, 10000,10000)
+        }
         function get_value() {
             var inputMass1 = document.getElementById("Mass1");
             var inputMass2 = document.getElementById("Mass2");
