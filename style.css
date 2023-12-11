@@ -22,7 +22,7 @@
   #page > canvas {
     grid-area: main;
     background-color: azure;
-    background-image: url("grid.png");
+    background-image: url("https://github.com/ViniBilck/vinibilck.github.io/blob/main/grid.png?raw=true");
   }
   
   #page > nav div {
