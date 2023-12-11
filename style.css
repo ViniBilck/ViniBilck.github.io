@@ -5,7 +5,7 @@
     grid-template-areas:
       "nav  main"
       "nav  main";
-    grid-template-rows: 1fr 500px;
+    grid-template-rows: 1fr 920px;
     grid-template-columns: 700px 1fr;
   }
   
@@ -21,7 +21,8 @@
   
   #page > canvas {
     grid-area: main;
-    background-color: #ffff64;
+    background-color: azure;
+    background-image: url("grid.png");
   }
   
   #page > nav div {

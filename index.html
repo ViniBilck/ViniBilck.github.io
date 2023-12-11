@@ -19,77 +19,77 @@
                     <span class="input-group-text">Ponto Vermelho</span>
                     <input type="text" id="Mass1" class="form-control" value="4000">
                     <span class="input-group-text">Massa</span>
-                    <span class="input-group-text">Kg</span>
+                
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Vermelho</span>
                     <input type="text" id="pos1x" class="form-control" value="0">
                     <span class="input-group-text">Posição Eixo X</span>
-                    <span class="input-group-text">m</span>
+            
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Vermelho</span>
                     <input type="text" id="pos1y" class="form-control" value="0">
                     <span class="input-group-text">Posição Eixo Y</span>
-                    <span class="input-group-text">m</span>
+            
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Vermelho</span>
                     <input type="text" id="vel1x" class="form-control" value="0">
                     <span class="input-group-text">Velocidade Eixo X</span>
-                    <span class="input-group-text">m/s</span>
+                    
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Vermelho</span>
                     <input type="text" id="vel1y" class="form-control" value="0">
                     <span class="input-group-text">Velocidade Eixo Y</span>
-                    <span class="input-group-text">m/s</span>
+                    
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Azul</span>
                     <input type="text" id="Mass2" class="form-control" value="10">
                     <span class="input-group-text">Massa</span>
-                    <span class="input-group-text">Kg</span>
+                
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Azul</span>
                     <input type="text" id="pos2x" class="form-control" value="100">
                     <span class="input-group-text">Posição Eixo X</span>
-                    <span class="input-group-text">m</span>
+            
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Azul</span>
                     <input type="text" id="pos2y" class="form-control" value="0">
                     <span class="input-group-text">Posição Eixo Y</span>
-                    <span class="input-group-text">m</span>
+            
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Azul</span>
                     <input type="text" id="vel2x" class="form-control" value="0">
                     <span class="input-group-text">Velocidade Eixo X</span>
-                    <span class="input-group-text">m/s</span>
+                    
                 </div>
                 <div class="input-group">
                     <span class="input-group-text">Ponto Azul</span>
                     <input type="text" id="vel2y" class="form-control" value="4">
                     <span class="input-group-text">Velocidade Eixo Y</span>
-                    <span class="input-group-text">m/s</span>
+                    
                 </div>
                 <div class="input-group">
                     <button type="button" onclick="get_value()" class="btn btn-dark">Pegar parâmetros escolhidos</button>
                 </div>
                 <div class="input-group">
-                    <button type="button" onclick="do_sim()" class="btn btn-dark">Simular</button>
+                    <button type="button" onclick="do_sim()" class="btn btn-success">Simular</button>
                 </div>
+                <div class="input-group">
+                    <button type="button" onclick="stop()" class="btn btn-danger">Parar Simulação</button>
+                </div>
+                
             </form>
         </nav>
-        <canvas id="canvas" width="1212" height="800"></canvas>
+        <canvas id="canvas" width="1212" height="920"></canvas>
       </section>   
     <script>
-        function do_sim() {
-            i =0;
-            roda()
-        }
         function get_value() {
             var inputMass1 = document.getElementById("Mass1");
             var inputMass2 = document.getElementById("Mass2");
@@ -120,7 +120,7 @@
         var width = canvas.width;
         var height = canvas.height;
         const initialTime = 0;
-        const finalTime = 3000;
+        const finalTime = 1000;
         const stepSize = 1;
         var x1_values = [];
         var y1_values = [];
@@ -129,7 +129,12 @@
         var t = 0; //iniciar plot na parte inferior
         var dt_ms = 16.0;
         var dt = dt_ms / 5000
-    
+        var N = 10;
+        var delta_x_axes = width/N;
+        var delta_y_axes = height/N;
+        var y_ax = 0;
+        var x_ax = 0;
+        draw_lines()
     </script>
 </body>
 </html>

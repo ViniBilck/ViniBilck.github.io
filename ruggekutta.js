@@ -57,6 +57,7 @@ function axesHorizontal(y){
     ctx.moveTo(0,y);
     ctx.lineTo(width, y);
     ctx.stroke();
+    ctx.fill()
 
 }
 
@@ -65,11 +66,21 @@ function axesVertical(x){
     ctx.moveTo(x,0);
     ctx.lineTo(x, height);
     ctx.stroke();
+    ctx.fill()
+}
+
+function draw_lines(){
+    for(j = 0; j<=N; j++){
+        axesHorizontal(y_ax);
+        axesVertical(x_ax);
+        y_ax = y_ax + delta_y_axes;
+        x_ax = x_ax + delta_x_axes;
+    }
+
 }
 
 function draw() {
     ctx.clearRect(0,0, 10000, 10000);                   //Particula
-    
     ctx.beginPath();
     ctx.ellipse(x1_values[i] , y1_values[i], 5, 5, 0, 0, Math.PI * 2);
     ctx.strokeStyle = "#edf0f1";
@@ -83,20 +94,26 @@ function draw() {
     ctx.fillStyle = "blue";
     ctx.stroke();
     ctx.fill();
-
-    i++;
     if (i == x1_values.length){
         i = 0;
-    }             
+    }            
 }
-                //Animação
 function here(){
+    //draw_lines();
     draw();
-    t=t+dt;
-    
+    i++;
 }
-
-        //Simular
+//Simular
 function roda(){
     K = setInterval("here()",dt_ms);
+}
+
+function do_sim() {
+    i =0;
+    roda()
+}
+
+function stop(){
+    clearInterval(K)
+    ctx.clearRect(0,0, 10000,10000)
 }
