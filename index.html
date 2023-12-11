@@ -5,73 +5,131 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulation</title>
     <script src="ruggekutta.js"></script>
-    <style>
-        #inner {  
-            border: 0.05em;
-        }
-
-        #outer {
-            border: 0.05em ;
-            width:50%;
-            display: flex;
-            justify-content: center;
-        }
-        #stack {
-            position:relative;
-        }
-        #stack > canvas {
-            position:absolute;
-            left:0;
-            top:0;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <div id="outer">
-        <div id = "inner">
-            <div id="stack">
-                <canvas id="canvas2" width="600" height="600"></canvas>
-                <canvas id="canvas" width="600" height="600"></canvas>
-            </div>
-        </div>
-    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js" integrity="sha384-BBtl+eGJRgqQAUMxJ7pMwbEyER4l1g+O15P+16Ep7Q9Q+zqX6gSbd85u4mG4QzX+" crossorigin="anonymous"></script>
+    <section id="page">
+        <nav>
+            <form type="form">
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Vermelho</span>
+                    <input type="text" id="Mass1" class="form-control" value="4000">
+                    <span class="input-group-text">Massa</span>
+                    <span class="input-group-text">Kg</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Vermelho</span>
+                    <input type="text" id="pos1x" class="form-control" value="0">
+                    <span class="input-group-text">Posição Eixo X</span>
+                    <span class="input-group-text">m</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Vermelho</span>
+                    <input type="text" id="pos1y" class="form-control" value="0">
+                    <span class="input-group-text">Posição Eixo Y</span>
+                    <span class="input-group-text">m</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Vermelho</span>
+                    <input type="text" id="vel1x" class="form-control" value="0">
+                    <span class="input-group-text">Velocidade Eixo X</span>
+                    <span class="input-group-text">m/s</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Vermelho</span>
+                    <input type="text" id="vel1y" class="form-control" value="0">
+                    <span class="input-group-text">Velocidade Eixo Y</span>
+                    <span class="input-group-text">m/s</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Azul</span>
+                    <input type="text" id="Mass2" class="form-control" value="10">
+                    <span class="input-group-text">Massa</span>
+                    <span class="input-group-text">Kg</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Azul</span>
+                    <input type="text" id="pos2x" class="form-control" value="100">
+                    <span class="input-group-text">Posição Eixo X</span>
+                    <span class="input-group-text">m</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Azul</span>
+                    <input type="text" id="pos2y" class="form-control" value="0">
+                    <span class="input-group-text">Posição Eixo Y</span>
+                    <span class="input-group-text">m</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Azul</span>
+                    <input type="text" id="vel2x" class="form-control" value="0">
+                    <span class="input-group-text">Velocidade Eixo X</span>
+                    <span class="input-group-text">m/s</span>
+                </div>
+                <div class="input-group">
+                    <span class="input-group-text">Ponto Azul</span>
+                    <input type="text" id="vel2y" class="form-control" value="4">
+                    <span class="input-group-text">Velocidade Eixo Y</span>
+                    <span class="input-group-text">m/s</span>
+                </div>
+                <div class="input-group">
+                    <button type="button" onclick="get_value()" class="btn btn-dark">Pegar parâmetros escolhidos</button>
+                </div>
+                <div class="input-group">
+                    <button type="button" onclick="do_sim()" class="btn btn-dark">Simular</button>
+                </div>
+            </form>
+        </nav>
+        <canvas id="canvas" width="1212" height="800"></canvas>
+      </section>   
     <script>
+        function do_sim() {
+            i =0;
+            roda()
+        }
+        function get_value() {
+            var inputMass1 = document.getElementById("Mass1");
+            var inputMass2 = document.getElementById("Mass2");
+            var inputPosX1 = document.getElementById("pos1x");
+            var inputPosX2 = document.getElementById("pos2x");
+            var inputPosY1 = document.getElementById("pos1y");
+            var inputPosY2 = document.getElementById("pos2y");
+            var inputVelX1 = document.getElementById("vel1x");
+            var inputVelX2 = document.getElementById("vel2x");
+            var inputVelY1 = document.getElementById("vel1y");
+            var inputVelY2 = document.getElementById("vel2y");
+            initialState1 = [inputMass1.value, inputMass2.value];
+            
+            masses = initialState1
+            var initialState = [width/2 + parseFloat(inputPosX1.value), height/2 + -1*parseFloat(inputPosY1.value), 
+            parseFloat(inputVelX1.value), -1*parseFloat(inputVelY1.value), parseFloat(inputPosX2.value) + width/2, 
+            -1*parseFloat(inputPosY2.value) + height/2, parseFloat(inputVelX2.value), -1*parseFloat(inputVelY2.value)];
+             // [x1, y1, vx1, vy1, x2, y2, vx2, vy2]
+            var results = rungeKutta(twoBodyProblem, initialState, initialTime, finalTime, stepSize);
+            x1_values = getColumn(results, 0);
+            y1_values = getColumn(results, 1);
+            x2_values = getColumn(results, 4);
+            y2_values = getColumn(results, 5);
+        }
+
         var cnv = document.getElementById("canvas");
         var ctx = cnv.getContext("2d");
-        var cnv2 = document.getElementById("canvas2");
-        var ctx2 = cnv2.getContext("2d");
         var width = canvas.width;
         var height = canvas.height;
-        const initialState = [width/2, height/2, 0, 0, 100 + width/2, 0 + height/2, 0, 4]; // [x1, y1, vx1, vy1, x2, y2, vx2, vy2]
         const initialTime = 0;
         const finalTime = 3000;
         const stepSize = 1;
-
-        const results = rungeKutta(twoBodyProblem, initialState, initialTime, finalTime, stepSize);
-
-        var x1_values = getColumn(results, 0);
-        var y1_values = getColumn(results, 1);
-                
-        var x2_values = getColumn(results, 4);
-        var y2_values = getColumn(results, 5);
+        var x1_values = [];
+        var y1_values = [];
+        var x2_values = [];
+        var y2_values = [];
         var t = 0; //iniciar plot na parte inferior
         var dt_ms = 16.0;
         var dt = dt_ms / 5000
-        var N = 10;
-        var delta_x_axes = width/N;
-        var delta_y_axes = height/N;
-        var y_ax = 0;
-        var x_ax = 0;
-        ctx2.strokeStyle = "black";
-        for(i = 0; i<=N; i++){
-            axesHorizontal(y_ax);
-            axesVertical(x_ax);
-            y_ax = y_ax + delta_y_axes;
-            x_ax = x_ax + delta_x_axes;
-        }
-        
-
-        roda()
+    
     </script>
 </body>
 </html>

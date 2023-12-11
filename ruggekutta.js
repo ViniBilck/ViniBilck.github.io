@@ -1,7 +1,7 @@
 function twoBodyProblem(t, state) {
     const G = 1; // Gravitational constant
-    const m1 = 2000; // Mass of body 1 (Earth)
-    const m2 = 4; // Mass of body 2 (Moon)
+    const m1 = initialState1[0]; // Mass of body 1 (Earth)
+    const m2 =initialState1[1]; // Mass of body 2 (Moon)
 
     const [x1, y1, vx1, vy1, x2, y2, vx2, vy2] = state;
 
@@ -46,42 +46,41 @@ function rungeKutta(f, initialState, t0, t1, h) {
 // Function to get a specific column from a 2D array
 function getColumn(matrix, col) {
     var j = [];
-    for(i = 0; i<results.length; i++){
+    for(i = 0; i<matrix.length; i++){
         j.push(matrix[i].state[col]);
     }
     return j
 }
 
 function axesHorizontal(y){
-    ctx2.beginPath();
-    ctx2.moveTo(0,y);
-    ctx2.lineTo(width, y);
-    ctx2.stroke();
+    ctx.beginPath();
+    ctx.moveTo(0,y);
+    ctx.lineTo(width, y);
+    ctx.stroke();
 
 }
 
 function axesVertical(x){
-    ctx2.beginPath();
-    ctx2.moveTo(x,0);
-    ctx2.lineTo(x, height);
-    ctx2.stroke();
-
+    ctx.beginPath();
+    ctx.moveTo(x,0);
+    ctx.lineTo(x, height);
+    ctx.stroke();
 }
 
-function draw(x, y) {
-    ctx.clearRect(0,0, height, width);                   //Particula
+function draw() {
+    ctx.clearRect(0,0, 10000, 10000);                   //Particula
     
     ctx.beginPath();
     ctx.ellipse(x1_values[i] , y1_values[i], 5, 5, 0, 0, Math.PI * 2);
     ctx.strokeStyle = "#edf0f1";
-    ctx.fillStyle = "#519872";
+    ctx.fillStyle = "red";
     ctx.stroke();
     ctx.fill();
 
     ctx.beginPath();
     ctx.ellipse(x2_values[i] , y2_values[i], 5, 5, 0, 0, Math.PI * 2);
     ctx.strokeStyle = "#edf0f1";
-    ctx.fillStyle = "#519872";
+    ctx.fillStyle = "blue";
     ctx.stroke();
     ctx.fill();
 
@@ -93,7 +92,8 @@ function draw(x, y) {
                 //Animação
 function here(){
     draw();
-    t=t+dt
+    t=t+dt;
+    
 }
 
         //Simular
