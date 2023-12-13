@@ -82,14 +82,14 @@ function draw_lines(){
 function draw() {
     ctx.clearRect(0,0, 10000, 10000);                   //Particula
     ctx.beginPath();
-    ctx.ellipse(x1_values[i] , y1_values[i], 5, 5, 0, 0, Math.PI * 2);
+    ctx.ellipse(x1_values[i] , y1_values[i], 20, 20, 0, 0, Math.PI * 2);
     ctx.strokeStyle = "#edf0f1";
     ctx.fillStyle = "red";
     ctx.stroke();
     ctx.fill();
 
     ctx.beginPath();
-    ctx.ellipse(x2_values[i] , y2_values[i], 5, 5, 0, 0, Math.PI * 2);
+    ctx.ellipse(x2_values[i] , y2_values[i], 20, 20, 0, 0, Math.PI * 2);
     ctx.strokeStyle = "#edf0f1";
     ctx.fillStyle = "blue";
     ctx.stroke();
